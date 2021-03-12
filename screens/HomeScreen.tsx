@@ -1,107 +1,109 @@
 import React from "react";
-import * as eva from "@eva-design/eva";
 import {
-  ApplicationProvider,
-  Layout,
+  Image,
+  StyleSheet,
   Text,
-  Card,
-  Icon,
-  Button,
-} from "@ui-kitten/components";
-import { default as theme } from "../pokemon_browser_theme.json";
-import { StyleSheet, Image, View } from "react-native";
+  SafeAreaView,
+  FlatList,
+  View,
+} from "react-native";
+import Headers from "../components/Header";
+import Card from "../components/Card";
+import Colors from "../constants/Colors";
 
-const HomeScreen = () => {
+const Data = [
+  {
+    id: 1,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 2,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 3,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 4,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 5,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 6,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 7,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 8,
+    url: require("../assets/default.png"),
+  },
+  {
+    id: 9,
+    url: require("../assets/default.png"),
+  },
+];
+
+export interface IHomeScreenProps {}
+
+function HomeScreen(props: IHomeScreenProps) {
   return (
     <>
-      <Layout
-        style={{
-          flex: 2,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View style={{ flex: 0.25 }}></View>
-        <Card style={styles.container}>
-          <Image
-            style={styles.image}
-            resizeMode={"stretch"}
-            source={require("../assets/default.png")}
-          />
-          <View style={styles.cardText}>
-            <Text category="h1">Name</Text>
-            <Text>Stats</Text>
-          </View>
-        </Card>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button
-              appearance="outline"
-              status="danger"
-              onPress={() => {
-                console.log("Like");
-              }}
-            >
-              Like
-            </Button>
-          </View>
-          <View style={styles.button}>
-            <Button
-              appearance="outline"
-              status="warning"
-              onPress={() => {
-                console.log("dislike");
-              }}
-            >
-              Dislike
-            </Button>
-          </View>
-        </View>
-      </Layout>
+      <Headers title="Pokemon Browser" />
+      <SafeAreaView style={styles.screen}>
+        <FlatList
+          data={Data}
+          renderItem={(itemList) => (
+            <View style={{paddingVertical: 10}}>
+                {console.log(itemList.item.url)}
+              <Card style={styles.card} key={itemList.item.id}>
+                <Image
+                  style={styles.image}
+                  source={itemList.item.url}
+                />
+                <Text style={styles.cardText}>Name: </Text>
+                <Text style={styles.cardText}>Stats: </Text>
+              </Card>
+            </View>
+          )}
+        />
+      </SafeAreaView>
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 2,
-    maxWidth: "90%",
-    alignItems: "center",
-    alignContent: "center",
-    backgroundColor: "rgba(99, 196, 25, 0.08)",
-  },
-  buttonContainer: {
-    flex: 0.75,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    alignContent: "center",
-  },
   image: {
-    flex: 2,
-    maxWidth: "80%",
-    maxHeight: "80%",
-    width: 320,
-    height: 200,
-    aspectRatio: 16 / 9,
-    paddingBottom: 15,
+    width: "95%",
+    height: "90%",
+    resizeMode: "stretch",
+  },
+  card: {
+    width: "95%",
+    justifyContent: "center",
+    alignItems: "center",
+    aspectRatio: 4 / 5,
+    backgroundColor: Colors.dark.foreground,
+    borderWidth: 2,
+    borderColor: Colors.primary.s4,
+  },
+  screen: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center",
+    backgroundColor: Colors.dark.background,
   },
   cardText: {
-    flex: 1,
-    paddingTop: 25,
-  },
-  button: {
-    padding: 10,
-    width: "40%",
-  },
-  btnCtr: {
-    width: "60%",
-    flexDirection: "row",
+    fontSize: 24,
+    fontWeight: "900",
+    color: Colors.dark.text,
   },
 });
 
-export default () => (
-  <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }}>
-    <HomeScreen />
-  </ApplicationProvider>
-);
+export default HomeScreen;
