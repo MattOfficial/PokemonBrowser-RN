@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import CustomButton, { ICustomButtonProps } from "../components/CustomButton";
 import Colors from "../constants/Colors";
 import Header from "../components/Header";
@@ -19,6 +19,9 @@ function HomeScreen(props: IHomeScreenProps) {
     setSearching(false);
     setScrollingRandom(true);
   };
+  const backBtnHandler = () => {
+    console.log("Back button pressed");
+  }
 
   const searchButtonProps: ICustomButtonProps = {
     children: "Search a Pokemon",
@@ -30,9 +33,11 @@ function HomeScreen(props: IHomeScreenProps) {
     onPress: randomPokemonHandler,
   };
 
+  const backButton = <Button title="Back" onPress={backBtnHandler} />
+
   const defaultComponent = (
     <>
-      <Header title="Pokemon Browser" />
+      <Header title="Pokemon Browser" buttonLeft={backButton} />
       <View style={styles.pads}></View>
       <View style={styles.buttonView}>
         <CustomButton
