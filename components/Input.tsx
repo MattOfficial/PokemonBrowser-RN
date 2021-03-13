@@ -10,13 +10,15 @@ const Input = (props: {
   maxLength?: any;
   onChangeText?: any;
   value?: string;
+  placeholder?: string;
+  placeholderTextColor?: string
+  
 }) => {
   return <TextInput {...props} style={{ ...styles.input, ...props.style }} />;
 };
 
 const styles = StyleSheet.create({
   input: {
-    height: 30,
     borderBottomColor: "grey",
     borderBottomWidth: 1,
     marginVertical: 10,

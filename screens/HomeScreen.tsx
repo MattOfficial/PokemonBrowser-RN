@@ -5,6 +5,7 @@ import CustomButton, { ICustomButtonProps } from "../components/CustomButton";
 import Colors from "../constants/Colors";
 import Header from "../components/Header";
 import RandomPokemonScreen from "./RandomPokemonScreen";
+import SearchScreen from "./SearchScreen";
 
 export interface IHomeScreenProps {}
 
@@ -73,7 +74,7 @@ function HomeScreen(props: IHomeScreenProps) {
     visibleComponent = defaultComponent;
   }
   if (searching && !scrollingRandom) {
-    visibleComponent = <View></View>;
+    visibleComponent = <SearchScreen />;
   }
   if (!searching && scrollingRandom) {
     visibleComponent = <RandomPokemonScreen />;
