@@ -1,12 +1,12 @@
 import React from "react";
+import { Provider } from "react-redux";
 import HomeScreen from "./screens/HomeScreen";
-import Header from "./components/Header";
+import store from "./store/store";
 
 export default function App() {
-
   return (
-    <>
-      <HomeScreen/>
-    </>
+    <Provider store={store}>
+      <HomeScreen />
+    </Provider>
   );
 }
