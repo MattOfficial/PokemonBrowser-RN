@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { View, StyleSheet, Button } from "react-native";
 import CustomButton, { ICustomButtonProps } from "../components/CustomButton";
 import Colors from "../constants/Colors";
@@ -20,8 +21,9 @@ function HomeScreen(props: IHomeScreenProps) {
     setScrollingRandom(true);
   };
   const backBtnHandler = () => {
-    console.log("Back button pressed");
-  }
+    setSearching(false);
+    setScrollingRandom(false);
+  };
 
   const searchButtonProps: ICustomButtonProps = {
     children: "Search a Pokemon",
@@ -33,11 +35,18 @@ function HomeScreen(props: IHomeScreenProps) {
     onPress: randomPokemonHandler,
   };
 
-  const backButton = <Button title="Back" onPress={backBtnHandler} />
+  const backButton = (
+    <CustomButton onPress={backBtnHandler}>
+      <Ionicons
+        name="chevron-back-outline"
+        color={Colors.dark.text}
+        size={30}
+      />
+    </CustomButton>
+  );
 
   const defaultComponent = (
     <>
-      <Header title="Pokemon Browser" buttonLeft={backButton} />
       <View style={styles.pads}></View>
       <View style={styles.buttonView}>
         <CustomButton
@@ -70,7 +79,12 @@ function HomeScreen(props: IHomeScreenProps) {
     visibleComponent = <RandomPokemonScreen />;
   }
 
-  return <View style={styles.container}>{visibleComponent}</View>;
+  return (
+    <View style={styles.container}>
+      <Header title="Pokemon Browser" buttonLeft={backButton} />
+      {visibleComponent}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -115,6 +129,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
     textAlign: "center",
     textAlignVertical: "center",
+  },
+  backBtnText: {
+    fontSize: 10,
   },
 });
 

@@ -10492,6 +10492,11 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-native-icons@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-icons/-/react-native-icons-0.7.1.tgz#a05c6c87bff7bfd883903bb9b7156f5ba568f977"
+  integrity sha1-oFxsh7/3v9iDkDu5txVvW6Vo+Xc=
+
 react-native-safe-area-context@3.1.9:
   version "3.1.9"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.9.tgz#48864ea976b0fa57142a2cc523e1fd3314e7247e"

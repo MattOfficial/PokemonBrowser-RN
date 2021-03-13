@@ -55,18 +55,14 @@ export interface IRandomPokemonScreenProps {}
 function RandomPokemonScreen(props: IRandomPokemonScreenProps) {
   return (
     <>
-      <Headers title="Pokemon Browser" />
       <SafeAreaView style={styles.screen}>
         <FlatList
           data={Data}
           renderItem={(itemList) => (
-            <View style={{paddingVertical: 10}}>
-                {console.log(itemList.item.url)}
+            <View style={{ paddingVertical: 10 }}>
+              {console.log(itemList.item.url)}
               <Card style={styles.card} key={itemList.item.id}>
-                <Image
-                  style={styles.image}
-                  source={itemList.item.url}
-                />
+                <Image style={styles.image} source={itemList.item.url} />
                 <Text style={styles.cardText}>Name: </Text>
                 <Text style={styles.cardText}>Stats: </Text>
               </Card>

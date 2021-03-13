@@ -11,12 +11,16 @@ const Header = (props: {
   headerStyle?: any;
 }) => {
   return (
-    <View style={{...styles.header, ...props.headerStyle}}>
-      <View style={{...styles.buttonContainer, ...props.buttonLeftStyle}}>{props.buttonLeft}</View>
+    <View style={{ ...styles.header, ...props.headerStyle }}>
+      <View style={{ ...styles.buttonContainer, ...props.buttonLeftStyle }}>
+        {props.buttonLeft}
+      </View>
       <View>
         <Text style={styles.headerText}>{props.title}</Text>
       </View>
-      <View style={{...styles.buttonContainer, ...props.buttonRightStyle}}>{props.buttonRight}</View>
+      <View style={{ ...styles.buttonContainer, ...props.buttonRightStyle }}>
+        {props.buttonRight}
+      </View>
     </View>
   );
 };
@@ -27,22 +31,23 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 90,
     paddingTop: 36,
-    backgroundColor: "#CD56E0",
+    backgroundColor: Colors.primary.s9,
     alignItems: "center",
     justifyContent: "center",
+    textAlignVertical: "bottom",
   },
   headerText: {
     flex: 8,
-    color: "black",
+    color: Colors.dark.text,
     fontSize: 25,
     fontWeight: "bold",
+    alignContent: "flex-end",
   },
   buttonContainer: {
     flex: 2,
     paddingHorizontal: 10,
-    height: '100%',
-    backgroundColor: Colors.primary.s4,
-  }
+    backgroundColor: Colors.primary.s9,
+  },
 });
 
 export default Header;
