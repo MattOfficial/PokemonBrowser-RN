@@ -1,108 +1,115 @@
-import React from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  FlatList,
-  View,
-} from "react-native";
-import Headers from "../components/Header";
-import Card from "../components/Card";
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import CustomButton, { ICustomButtonProps } from "../components/CustomButton";
 import Colors from "../constants/Colors";
-
-const Data = [
-  {
-    id: 1,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 2,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 3,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 4,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 5,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 6,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 7,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 8,
-    url: require("../assets/default.png"),
-  },
-  {
-    id: 9,
-    url: require("../assets/default.png"),
-  },
-];
+import Header from "../components/Header";
+import RandomPokemonScreen from "./RandomPokemonScreen";
 
 export interface IHomeScreenProps {}
 
 function HomeScreen(props: IHomeScreenProps) {
-  return (
+  const [searching, setSearching] = useState(false);
+  const [scrollingRandom, setScrollingRandom] = useState(false);
+
+  const searchPokemonHandler = () => {
+    setSearching(true);
+    setScrollingRandom(false);
+  };
+  const randomPokemonHandler = () => {
+    setSearching(false);
+    setScrollingRandom(true);
+  };
+
+  const searchButtonProps: ICustomButtonProps = {
+    children: "Search a Pokemon",
+    onPress: searchPokemonHandler,
+  };
+
+  const randomButtonProps: ICustomButtonProps = {
+    children: "Get random Pokemon",
+    onPress: randomPokemonHandler,
+  };
+
+  const defaultComponent = (
     <>
-      <Headers title="Pokemon Browser" />
-      <SafeAreaView style={styles.screen}>
-        <FlatList
-          data={Data}
-          renderItem={(itemList) => (
-            <View style={{paddingVertical: 10}}>
-                {console.log(itemList.item.url)}
-              <Card style={styles.card} key={itemList.item.id}>
-                <Image
-                  style={styles.image}
-                  source={itemList.item.url}
-                />
-                <Text style={styles.cardText}>Name: </Text>
-                <Text style={styles.cardText}>Stats: </Text>
-              </Card>
-            </View>
-          )}
-        />
-      </SafeAreaView>
+      <Header title="Pokemon Browser" />
+      <View style={styles.pads}></View>
+      <View style={styles.buttonView}>
+        <CustomButton
+          style={styles.searchBtn}
+          textStyle={styles.searchBtnText}
+          onPress={searchButtonProps.onPress}
+        >
+          {searchButtonProps.children}
+        </CustomButton>
+        <CustomButton
+          style={styles.randomBtn}
+          textStyle={styles.randomBtnText}
+          onPress={randomButtonProps.onPress}
+        >
+          {randomButtonProps.children}
+        </CustomButton>
+      </View>
+      <View style={styles.pads}></View>
     </>
   );
+
+  let visibleComponent = <View></View>;
+  if (!searching && !scrollingRandom) {
+    visibleComponent = defaultComponent;
+  }
+  if (searching && !scrollingRandom) {
+    visibleComponent = <View></View>;
+  }
+  if (!searching && scrollingRandom) {
+    visibleComponent = <RandomPokemonScreen />;
+  }
+
+  return <View style={styles.container}>{visibleComponent}</View>;
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: "95%",
-    height: "90%",
-    resizeMode: "stretch",
-  },
-  card: {
-    width: "95%",
-    justifyContent: "center",
-    alignItems: "center",
-    aspectRatio: 4 / 5,
-    backgroundColor: Colors.dark.foreground,
-    borderWidth: 2,
-    borderColor: Colors.primary.s4,
-  },
-  screen: {
+  container: {
     flex: 1,
-    padding: 10,
+  },
+  buttonView: {
+    flex: 3,
+    alignContent: "center",
     alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: Colors.dark.background,
+    padding: 20,
+  },
+  pads: {
+    flex: 1,
     backgroundColor: Colors.dark.background,
   },
-  cardText: {
+  searchBtn: {
+    borderWidth: 2,
+    borderColor: Colors.danger.s5,
+    backgroundColor: Colors.danger.t1,
+    maxWidth: "80%",
+  },
+  searchBtnText: {
+    color: Colors.danger.s5,
     fontSize: 24,
-    fontWeight: "900",
-    color: Colors.dark.text,
+    padding: 25,
+    textAlign: "center",
+    textAlignVertical: "center",
+  },
+  randomBtn: {
+    borderWidth: 2,
+    borderColor: Colors.success.s5,
+    backgroundColor: Colors.success.t1,
+    maxWidth: "80%",
+  },
+  randomBtnText: {
+    color: Colors.success.s5,
+    fontSize: 24,
+    padding: 25,
+    alignContent: "center",
+    textAlign: "center",
+    textAlignVertical: "center",
   },
 });
 
