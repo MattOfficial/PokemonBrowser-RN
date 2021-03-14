@@ -60,7 +60,6 @@ function RandomPokemonScreen(props: IRandomPokemonScreenProps) {
           data={Data}
           renderItem={(itemList) => (
             <View style={{ paddingVertical: 10 }}>
-              {console.log(itemList.item.url)}
               <Card style={styles.card} key={itemList.item.id}>
                 <Image style={styles.image} source={itemList.item.url} />
                 <Text style={styles.cardText}>Name: </Text>
