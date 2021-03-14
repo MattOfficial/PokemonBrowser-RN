@@ -6,10 +6,15 @@ import Colors from "../constants/Colors";
 import Header from "../components/Header";
 import RandomPokemonScreen from "./RandomPokemonScreen";
 import SearchScreen from "./SearchScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { PokeListType } from "../actions/PokeListActionTypes";
+import { RootStore } from "../store/store";
+import { GetPokeList } from "../actions/PokeListActions";
 
 export interface IHomeScreenProps {}
 
 function HomeScreen(props: IHomeScreenProps) {
+  const dispatch = useDispatch();
   const [searching, setSearching] = useState(false);
   const [scrollingRandom, setScrollingRandom] = useState(false);
 

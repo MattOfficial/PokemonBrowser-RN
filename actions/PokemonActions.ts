@@ -2,7 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { PokemonDispatchTypes, PokemonActions } from "./PokemonActionTypes";
 
-export const GetPokemon = (pokemon: string) => async (
+export const GetPokemon = (pokemon: string | number) => async (
   dispatch: Dispatch<PokemonDispatchTypes>
 ) => {
   try {
